@@ -6,6 +6,7 @@ import json
 import slack 
 from tabulate import tabulate
 updates=[]
+totalStats=[]
 isUpdatesPresent=False
 
 def TabulateData():
@@ -16,6 +17,8 @@ def TabulateData():
     
     for state in constants.StateStatsDB.keys():
         tableRows.append([state.rstrip(),constants.StateStatsDB[state][constants.statsKeys[2]],constants.StateStatsDB[state][constants.statsKeys[3]],constants.StateStatsDB[state][constants.statsKeys[4]],constants.StateStatsDB[state][constants.statsKeys[5]]])
+    tableRows.append(totalStats)
+
     return tabulate(tableRows,headers,tablefmt="psql")
 
 
@@ -29,9 +32,9 @@ def LoadData():
     return data
 
 def writeChanges():
-    logging.info("Updates Present ")
-    with open('results.json','a') as fp:
-        json.dump(constants.updates, fp)
+    print(updates)
+    pass
+    
     
 def checkStatePresent(stateName):
     try:
@@ -48,32 +51,40 @@ def CheckAndRefreshCache():
 
 
 def CheckForValidState(tableInput):
+    global isUpdatesPresent
     logtag="Inside CheckForValidState"
     dataSize=len(tableInput)
     if dataSize>5:
         logging.info("Received State Data")
         stateName=tableInput[1].text
+        print(stateName,"sa")
+        print(stateName.rstrip().lstrip(),"sa")
         logging.info("[State] received"+ stateName)
         if checkStatePresent(stateName):
             for i in range(2,len(tableInput)):
                 try:
                     if constants.StateStatsDB[stateName][constants.statsKeys[i]]!=tableInput[i].text:
                         constants.StateStatsDB[stateName][constants.statsKeys[i]]=tableInput[i].text
-                        updates.append(constants.StateStatsDB[stateName][constants.statsKeys[i]])
                         isUpdatesPresent=True
                 except KeyError:
                     logging.error(logtag+"Invalid key while populating stats")
         return
     if dataSize==5:
         logging.info("Received Complete India's stats")
+        
+        for i in tableInput:
+            
+            if i.text !=" ":
+                totalStats.append(i.text.rstrip().lstrip())
+        
         return 
     
-    logging.info("Received spam data")
+    #logging.error("Received spam data")
     return
 
-def saveFile():
-    with open('result.json', 'w') as fp:
-        json.dump(constants.StateStatsDB, fp)
+def saveFile(Object,FileName):
+    with open(FileName, 'w') as fp:
+        json.dump(Object, fp)
 
 
 
@@ -87,14 +98,14 @@ def GetDataAndProcess():
         if len(col)>0:
             logging.info("[FOUND] Tables found with columns")
             CheckForValidState(col)
-    saveFile()
+    saveFile(constants.StateStatsDB,'result.json')
     if isUpdatesPresent:
         writeChanges()
     slack.slacker()(TabulateData())
 
 if __name__ == "__main__":
     isUpdatesPresent=False
-    currData=LoadData()
+    constants.StateStatsDB=LoadData()
     CheckAndRefreshCache()
-    TabulateData()
-    
+
+    saveFile(TabulateData(),'SaveTable.json')
