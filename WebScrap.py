@@ -5,6 +5,9 @@ import constants
 import json
 import slack 
 from tabulate import tabulate
+updates=[]
+isUpdatesPresent=False
+
 def TabulateData():
     
     headers=constants.statsKeys[2:]
@@ -15,7 +18,7 @@ def TabulateData():
         tableRows.append([state.rstrip(),constants.StateStatsDB[state][constants.statsKeys[2]],constants.StateStatsDB[state][constants.statsKeys[3]],constants.StateStatsDB[state][constants.statsKeys[4]],constants.StateStatsDB[state][constants.statsKeys[5]]])
     return tabulate(tableRows,headers,tablefmt="psql")
 
-isUpdatesPresent=False
+
 
 def GetDataByStateName(stateName):
     return constants.StateStatsDB[stateName]
@@ -56,7 +59,7 @@ def CheckForValidState(tableInput):
                 try:
                     if constants.StateStatsDB[stateName][constants.statsKeys[i]]!=tableInput[i].text:
                         constants.StateStatsDB[stateName][constants.statsKeys[i]]=tableInput[i].text
-                        updates.append
+                        updates.append(constants.StateStatsDB[stateName][constants.statsKeys[i]])
                         isUpdatesPresent=True
                 except KeyError:
                     logging.error(logtag+"Invalid key while populating stats")
@@ -90,7 +93,7 @@ def GetDataAndProcess():
     slack.slacker()(TabulateData())
 
 if __name__ == "__main__":
-    #isUpdatesPresent=False
+    isUpdatesPresent=False
     currData=LoadData()
     CheckAndRefreshCache()
     TabulateData()
