@@ -1,0 +1,24 @@
+[2020-03-23 20:43:15,689] Starting new HTTPS connection (1): www.mohfw.gov.in:443
+[2020-03-23 20:43:15,882] https://www.mohfw.gov.in:443 "GET / HTTP/1.1" 200 5275
+[2020-03-23 20:43:15,908] oops, corono script failed.
+Traceback (most recent call last):
+  File "/Users/itn.yukesh.kumar/Desktop/corona updates/coronovirus-bot-tracker/corona_bot.py", line 58, in <module>
+    past_data = load()
+  File "/Users/itn.yukesh.kumar/Desktop/corona updates/coronovirus-bot-tracker/corona_bot.py", line 26, in load
+    with open(FILE_NAME, 'r') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'corona_india_data.json'
+[2020-03-23 20:43:15,909] Sending Exception occured: [[Errno 2] No such file or directory: 'corona_india_data.json'] to slack
+[2020-03-23 20:43:15,910] Starting new HTTPS connection (1): hooks.slack.com:443
+[2020-03-23 20:43:16,255] https://hooks.slack.com:443 "POST /services/TCURZGK61/B0107K2BLL9/Uh34m0pYj28rzuaSBqMj97ws HTTP/1.1" 200 22
+[2020-03-24 13:06:26,022] Starting new HTTPS connection (1): www.mohfw.gov.in:443
+[2020-03-24 13:06:26,264] https://www.mohfw.gov.in:443 "GET / HTTP/1.1" 200 7789
+[2020-03-24 13:06:26,312] oops, corono script failed.
+Traceback (most recent call last):
+  File "/Users/itn.yukesh.kumar/Desktop/corona updates/coronovirus-bot-tracker/corona_bot.py", line 55, in <module>
+    elif any([s.lower() in stat[1].lower() for s in interested_states]):
+  File "/Users/itn.yukesh.kumar/Desktop/corona updates/coronovirus-bot-tracker/corona_bot.py", line 55, in <listcomp>
+    elif any([s.lower() in stat[1].lower() for s in interested_states]):
+IndexError: list index out of range
+[2020-03-24 13:06:26,312] Sending Exception occured: [list index out of range] to slack
+[2020-03-24 13:06:26,313] Starting new HTTPS connection (1): hooks.slack.com:443
+[2020-03-24 13:06:27,157] https://hooks.slack.com:443 "POST /services/TCURZGK61/B0107K2BLL9/Uh34m0pYj28rzuaSBqMj97ws HTTP/1.1" 200 22
