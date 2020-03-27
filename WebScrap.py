@@ -3,9 +3,11 @@ import requests,logging
 from collections import defaultdict 
 import constants
 import json
+import datetime
 import slack 
 from tabulate import tabulate
 updates=[]
+stateWiseChanges=defaultdict(bool)
 totalStats=[]
 isUpdatesPresent=False
 
@@ -31,11 +33,17 @@ def LoadData():
         data =json.load(fp)
     return data
 
-def writeChanges():
-    print(updates)
-    pass
-    
-    
+def ScanAndFillUpdateData(stName,statsKeyIndex,prevData,currData):
+    global updates
+    global stateWiseChanges
+
+    if stateWiseChanges[stName]:
+        updates.append("\n"+constants.statsKeys[statsKeyIndex]+" Previous : "+prevData+" Now: "+currData)
+        
+    else:
+        stateWiseChanges[stName]=True
+        updates.append("\n******\n"+stName+" :\n"+constants.statsKeys[statsKeyIndex]+" Previous : "+prevData+" Now: "+currData)
+  
 def checkStatePresent(stateName):
     try:
         if constants.StateStatsDB[stateName]:
@@ -45,41 +53,37 @@ def checkStatePresent(stateName):
         logging.error("Invalid State received : "+stateName+"\n Fix: \n1.  Check for proper formatting!\n2.statename in the DB is different \n3.Junk StateName")
     return False
 
-def CheckAndRefreshCache():
-    logging.info("Refreshing DB for Updates")
-    GetDataAndProcess()
 
-
-def CheckForValidState(tableInput):
+def CheckForValidState(tableInput,updateTimeInfo):
     global isUpdatesPresent
     logtag="Inside CheckForValidState"
     dataSize=len(tableInput)
-    if dataSize>5:
+    
+    if dataSize==6:
         logging.info("Received State Data")
         stateName=tableInput[1].text
-        print(stateName,"sa")
-        print(stateName.rstrip().lstrip(),"sa")
         logging.info("[State] received"+ stateName)
+        
         if checkStatePresent(stateName):
+            
             for i in range(2,len(tableInput)):
                 try:
-                    if constants.StateStatsDB[stateName][constants.statsKeys[i]]!=tableInput[i].text:
-                        constants.StateStatsDB[stateName][constants.statsKeys[i]]=tableInput[i].text
+                    prevData=constants.StateStatsDB[stateName][constants.statsKeys[i]]
+                    currData=tableInput[i].text
+                    if prevData!=currData:
+                        ScanAndFillUpdateData(stateName,i,prevData,currData)
+                        constants.StateStatsDB[stateName][constants.statsKeys[i]]=currData
                         isUpdatesPresent=True
                 except KeyError:
                     logging.error(logtag+"Invalid key while populating stats")
-        return
+
     if dataSize==5:
         logging.info("Received Complete India's stats")
         
         for i in tableInput:
-            
             if i.text !=" ":
                 totalStats.append(i.text.rstrip().lstrip())
         
-        return 
-    
-    #logging.error("Received spam data")
     return
 
 def saveFile(Object,FileName):
@@ -89,7 +93,10 @@ def saveFile(Object,FileName):
 
 
 def GetDataAndProcess():
+    global isUpdatesPresent
+    global updates
     url="https://www.mohfw.gov.in/"
+    updateTimeInfo="Updates at : "+str(datetime.datetime.now())
     req=requests.get(url) 
     soup = bs(req.content, 'html.parser')
     rows=soup.find_all("tr")
@@ -97,15 +104,18 @@ def GetDataAndProcess():
         col=row.find_all("td")
         if len(col)>0:
             logging.info("[FOUND] Tables found with columns")
-            CheckForValidState(col)
-    saveFile(constants.StateStatsDB,'result.json')
+            CheckForValidState(col,updateTimeInfo)
     if isUpdatesPresent:
-        writeChanges()
+        updates.insert(0,updateTimeInfo)
+        slackSendMessage=""
+        for i in updates:
+            slackSendMessage+=i
+        slack.slacker()(slackSendMessage)    
+        
+    saveFile(constants.StateStatsDB,'result.json')
+    
     slack.slacker()(TabulateData())
 
 if __name__ == "__main__":
-    isUpdatesPresent=False
     constants.StateStatsDB=LoadData()
-    CheckAndRefreshCache()
-
-    saveFile(TabulateData(),'SaveTable.json')
+    GetDataAndProcess()
