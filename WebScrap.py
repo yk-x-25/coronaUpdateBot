@@ -59,7 +59,7 @@ def CheckForValidState(tableInput,updateTimeInfo):
     logtag="Inside CheckForValidState"
     dataSize=len(tableInput)
     
-    if dataSize==6:
+    if dataSize>=5:
         logging.info("Received State Data")
         stateName=tableInput[1].text
         logging.info("[State] received"+ stateName)
@@ -77,7 +77,7 @@ def CheckForValidState(tableInput,updateTimeInfo):
                 except KeyError:
                     logging.error(logtag+"Invalid key while populating stats")
 
-    if dataSize==5:
+    if dataSize>=4:
         logging.info("Received Complete India's stats")
         
         for i in tableInput:
