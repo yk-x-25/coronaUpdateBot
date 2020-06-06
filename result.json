@@ -1,1 +1,218 @@
-{"Andhra Pradesh": {"death": "0", "cured": "1", "indian": "11", "foreign": "0"}, "Arunachal Pradesh": {"death": "1", "cured": "1", "indian": "2", "foreign": "0"}, "Assam": {"death": "1", "cured": "1", "indian": "0", "foreign": "0"}, "Bihar": {"death": "1", "cured": "0", "indian": "3", "foreign": "0"}, "Chhattisgarh": {"death": "0", "cured": "0", "indian": "3", "foreign": "0"}, "Goa": {"death": "0", "cured": "0", "indian": "3", "foreign": "0"}, "Gujarat": {"death": "2", "cured": "0", "indian": "37", "foreign": "1"}, "Haryana": {"death": "0", "cured": "11", "indian": "16", "foreign": "14"}, "Himachal Pradesh": {"death": "1", "cured": "0", "indian": "3", "foreign": "0"}, "Jammu and Kashmir": {"death": "0", "cured": "1", "indian": "11", "foreign": "0"}, "Jharkhand": {"death": "0", "cured": "0", "indian": "0", "foreign": "0"}, "Karnataka": {"death": "1", "cured": "3", "indian": "41", "foreign": "0"}, "Kerala": {"death": "0", "cured": "4", "indian": "110", "foreign": "8"}, "Madhya Pradesh": {"death": "1", "cured": "0", "indian": "15", "foreign": "0"}, "Maharashtra": {"death": "3", "cured": "1", "indian": "121", "foreign": "3"}, "Manipur": {"death": "0", "cured": "0", "indian": "1", "foreign": "0"}, "Meghalaya": {"death": "0", "cured": "0", "indian": "0", "foreign": "0"}, "Mizoram": {"death": "0", "cured": "0", "indian": "1", "foreign": "0"}, "Nagaland": {"death": "0", "cured": "0", "indian": "0", "foreign": "0"}, "Odisha": {"death": "0", "cured": "0", "indian": "2", "foreign": "0"}, "Punjab": {"death": "1", "cured": "0", "indian": "33", "foreign": "0"}, "Rajasthan": {"death": "0", "cured": "3", "indian": "36", "foreign": "2"}, "Sikkim": {"death": "0", "cured": "0", "indian": "0", "foreign": "0"}, "Tamil Nadu": {"death": "1", "cured": "1", "indian": "20", "foreign": "6"}, "Telangana": {"death": "1", "cured": "2", "indian": "23", "foreign": "19"}, "Tripura": {"death": "23", "cured": "0", "indian": "0", "foreign": "23"}, "Uttar Pradesh": {"death": "0", "cured": "11", "indian": "36", "foreign": "1"}, "Uttarakhand": {"death": "0", "cured": "0", "indian": "4", "foreign": "1"}, "West Bengal": {"death": "1", "cured": "0", "indian": "9", "foreign": "0"}, "Andaman and Nicobar Islands": {"death": "0", "cured": "0", "indian": "0", "foreign": "0"}, "Chandigarh": {"death": "0", "cured": "0", "indian": "7", "foreign": "0"}, "Dadra and Nagar Haveli": {"death": "0", "cured": "0", "indian": "0", "foreign": "0"}, "Daman and Diu": {"death": "0", "cured": "0", "indian": "0", "foreign": "0"}, "Lakshadweep": {"death": "0", "cured": "0", "indian": "0", "foreign": "0"}, "Delhi": {"death": "1", "cured": "6", "indian": "34", "foreign": "1"}, "Puducherry": {"death": "0", "cured": "0", "indian": "1", "foreign": "0"}, "Telengana": {"death": "0", "cured": "1", "indian": "31", "foreign": "10"}, "Ladakh": {"death": "0", "cured": "0", "indian": "13", "foreign": "0"}}
+{
+    "Andhra Pradesh": {
+        "Death": "73",
+        "Cured": "2576",
+        "Active": "1654",
+        "Total": "4303"
+    },
+    "Arunachal Pradesh": {
+        "Death": "0",
+        "Cured": "1",
+        "Active": "44",
+        "Total": "45"
+    },
+    "Assam": {
+        "Death": "4",
+        "Cured": "498",
+        "Active": "1651",
+        "Total": "2153"
+    },
+    "Bihar": {
+        "Death": "29",
+        "Cured": "2225",
+        "Active": "2342",
+        "Total": "4596"
+    },
+    "Chhattisgarh": {
+        "Death": "2",
+        "Cured": "244",
+        "Active": "633",
+        "Total": "879"
+    },
+    "Goa": {
+        "Death": "0",
+        "Cured": "65",
+        "Active": "131",
+        "Total": "196"
+    },
+    "Gujarat": {
+        "Death": "1190",
+        "Cured": "13003",
+        "Active": "4901",
+        "Total": "19094"
+    },
+    "Haryana": {
+        "Death": "24",
+        "Cured": "2134",
+        "Active": "1439",
+        "Total": "3597"
+    },
+    "Himachal Pradesh": {
+        "Death": "5",
+        "Cured": "189",
+        "Active": "199",
+        "Total": "393"
+    },
+    "Jammu and Kashmir": {
+        "Death": "36",
+        "Cured": "1086",
+        "Active": "2202",
+        "Total": "3324"
+    },
+    "Jharkhand": {
+        "Death": "7",
+        "Cured": "410",
+        "Active": "464",
+        "Total": "881"
+    },
+    "Karnataka": {
+        "Death": "57",
+        "Cured": "1688",
+        "Active": "3090",
+        "Total": "4835"
+    },
+    "Kerala": {
+        "Death": "14",
+        "Cured": "712",
+        "Active": "973",
+        "Total": "1699"
+    },
+    "Madhya Pradesh": {
+        "Death": "384",
+        "Cured": "5878",
+        "Active": "2734",
+        "Total": "8996"
+    },
+    "Maharashtra": {
+        "Death": "2849",
+        "Cured": "35156",
+        "Active": "42224",
+        "Total": "80229"
+    },
+    "Manipur": {
+        "Death": "0",
+        "Cured": "41",
+        "Active": "91",
+        "Total": "132"
+    },
+    "Meghalaya": {
+        "Death": "1",
+        "Cured": "13",
+        "Active": "19",
+        "Total": "33"
+    },
+    "Mizoram": {
+        "Death": "0",
+        "Cured": "1",
+        "Active": "21",
+        "Total": "22"
+    },
+    "Nagaland": {
+        "Death": "0",
+        "Cured": "0",
+        "Active": "94",
+        "Total": "94"
+    },
+    "Odisha": {
+        "Death": "8",
+        "Cured": "1604",
+        "Active": "996",
+        "Total": "2608"
+    },
+    "Punjab": {
+        "Death": "48",
+        "Cured": "2069",
+        "Active": "344",
+        "Total": "2461"
+    },
+    "Rajasthan": {
+        "Death": "218",
+        "Cured": "7359",
+        "Active": "2507",
+        "Total": "10084"
+    },
+    "Sikkim": {
+        "Death": "0",
+        "Cured": "0",
+        "Active": "3",
+        "Total": "3"
+    },
+    "Tamil Nadu": {
+        "Death": "232",
+        "Cured": "15762",
+        "Active": "12700",
+        "Total": "28694"
+    },
+    "Telangana": {
+        "Death": "0",
+        "Cured": "0",
+        "Active": "0",
+        "Total": "0"
+    },
+    "Tripura": {
+        "Death": "0",
+        "Cured": "173",
+        "Active": "519",
+        "Total": "692"
+    },
+    "Uttar Pradesh": {
+        "Death": "257",
+        "Cured": "5648",
+        "Active": "3828",
+        "Total": "9733"
+    },
+    "Uttarakhand": {
+        "Death": "11",
+        "Cured": "344",
+        "Active": "860",
+        "Total": "1215"
+    },
+    "West Bengal": {
+        "Death": "366",
+        "Cured": "2912",
+        "Active": "4025",
+        "Total": "7303"
+    },
+    "Andaman and Nicobar Islands": {
+        "Death": "0",
+        "Cured": "33",
+        "Active": "0",
+        "Total": "33"
+    },
+    "Chandigarh": {
+        "Death": "5",
+        "Cured": "222",
+        "Active": "77",
+        "Total": "304"
+    },
+    "Dadar Nagar Haveli": {
+        "Death": "0",
+        "Cured": "1",
+        "Active": "13",
+        "Total": "14"
+    },
+    "Delhi": {
+        "Death": "708",
+        "Cured": "10315",
+        "Active": "15311",
+        "Total": "26334"
+    },
+    "Puducherry": {
+        "Death": "0",
+        "Cured": "36",
+        "Active": "63",
+        "Total": "99"
+    },
+    "Telengana": {
+        "Death": "113",
+        "Cured": "1627",
+        "Active": "1550",
+        "Total": "3290"
+    },
+    "Ladakh": {
+        "Death": "1",
+        "Cured": "48",
+        "Active": "48",
+        "Total": "97"
+    }
+}
