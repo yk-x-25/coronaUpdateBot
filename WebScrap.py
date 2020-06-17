@@ -70,7 +70,7 @@ def CheckForValidState(tableInput,updateTimeInfo):
                 try:
                     prevData=constants.StateStatsDB[stateName][constants.statsKeys[i]]
                     currData=tableInput[i].text
-                    logging.info("{}: Data {} for State: {}".format(logtag,stateName,currData))
+                    logging.info("{}: Data {} : {} for State: {}".format(logtag,constants.statsKeys[i],currData,stateName))
                     if prevData!=currData:
                         ScanAndFillUpdateData(stateName,i,prevData,currData)
                         constants.StateStatsDB[stateName][constants.statsKeys[i]]=currData
@@ -78,13 +78,15 @@ def CheckForValidState(tableInput,updateTimeInfo):
                 except KeyError:
                     logging.error(logtag+": Invalid key while populating stats")
 
-    if dataSize>=4:
+    if dataSize==4:
         logging.info("Received Complete India's stats")
-        
+        print("********")
         for i in tableInput:
+            
             if i.text !=" ":
-                totalStats.append(i.text.rstrip().lstrip())
-        
+                print(i.text)
+                #totalStats.append(i.text.rstrip().lstrip())
+        print("********")
     return
 
 def saveFile(Object,FileName):
@@ -116,7 +118,7 @@ def GetDataAndProcess():
         slack.slacker()(slackSendMessage)    
         
     saveFile(constants.StateStatsDB,'result.json')
-    
+    logging.info(TabulateData())
     slack.slacker()(TabulateData())
 
 if __name__ == "__main__":
