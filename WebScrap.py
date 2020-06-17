@@ -56,13 +56,13 @@ def checkStatePresent(stateName):
 
 def CheckForValidState(tableInput,updateTimeInfo):
     global isUpdatesPresent
-    logtag="Inside CheckForValidState"
+    logtag="Validate_State"
     dataSize=len(tableInput)
     
     if dataSize>=5:
         logging.info("Received State Data")
         stateName=tableInput[1].text
-        logging.info("[State] received"+ stateName)
+        logging.info(logtag+" State received"+ stateName)
         
         if checkStatePresent(stateName):
             
@@ -70,20 +70,23 @@ def CheckForValidState(tableInput,updateTimeInfo):
                 try:
                     prevData=constants.StateStatsDB[stateName][constants.statsKeys[i]]
                     currData=tableInput[i].text
+                    logging.info("{}: Data {} : {} for State: {}".format(logtag,constants.statsKeys[i],currData,stateName))
                     if prevData!=currData:
                         ScanAndFillUpdateData(stateName,i,prevData,currData)
                         constants.StateStatsDB[stateName][constants.statsKeys[i]]=currData
                         isUpdatesPresent=True
                 except KeyError:
-                    logging.error(logtag+"Invalid key while populating stats")
+                    logging.error(logtag+": Invalid key while populating stats")
 
-    if dataSize>=4:
+    if dataSize==4:
         logging.info("Received Complete India's stats")
-        
+        print("********")
         for i in tableInput:
+            
             if i.text !=" ":
-                totalStats.append(i.text.rstrip().lstrip())
-        
+                print(i.text)
+                #totalStats.append(i.text.rstrip().lstrip())
+        print("********")
     return
 
 def saveFile(Object,FileName):
@@ -103,8 +106,10 @@ def GetDataAndProcess():
     for row in rows:
         col=row.find_all("td")
         if len(col)>0:
-            logging.info("[FOUND] Tables found with columns")
+            logging.info("[FOUND] Tables found with columns {}" .format(col))
+            
             CheckForValidState(col,updateTimeInfo)
+    
     if isUpdatesPresent:
         updates.insert(0,updateTimeInfo)
         slackSendMessage=""
@@ -113,9 +118,10 @@ def GetDataAndProcess():
         slack.slacker()(slackSendMessage)    
         
     saveFile(constants.StateStatsDB,'result.json')
-    
+    logging.info(TabulateData())
     slack.slacker()(TabulateData())
 
 if __name__ == "__main__":
+    logging.basicConfig(filename='BotErrs.log',level=logging.DEBUG)
     constants.StateStatsDB=LoadData()
     GetDataAndProcess()
